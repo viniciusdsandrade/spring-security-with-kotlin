@@ -27,16 +27,16 @@ class UserRepository {
         return true
     }
 
-    fun findByEmail(email: String): String? {
+    fun findByEmail(email: String): User? {
         return null
     }
 
-    fun findByUuid(uuid: UUID): User? =
+    fun findByUUID(uuid: UUID): User? =
         users.firstOrNull { it.id == uuid }
 
 
-    fun findAll(): List<String> {
-        return listOf("User")
+    fun findAll(): List<User> {
+        return users
     }
 
 
