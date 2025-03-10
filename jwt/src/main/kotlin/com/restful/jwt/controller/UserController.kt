@@ -6,10 +6,8 @@ import com.restful.jwt.model.Role
 import com.restful.jwt.model.User
 import com.restful.jwt.service.UserService
 import org.springframework.http.HttpStatus.*
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 import java.util.*
 
@@ -29,6 +27,28 @@ class UserController(
             ?.toResponse()
             ?: throw ResponseStatusException(BAD_REQUEST, "User already exists")
 
+    @GetMapping
+    fun listAllUsers(): List<UserResponse> =
+        userService.findAll()
+            .map { it.toResponse() }
+
+    @GetMapping("/{uuid}")
+    fun findUserById(@PathVariable uuid: UUID): UserResponse =
+        userService.findByUUID(uuid)
+            ?.toResponse()
+            ?: throw ResponseStatusException(NOT_FOUND, "User not found")
+
+    @DeleteMapping("/{uuid}")
+    fun deleteUserById(@PathVariable uuid: UUID): ResponseEntity<Boolean> {
+        val sucess = userService.deleteByUUID(uuid)
+
+        return if (sucess)
+            ResponseEntity.noContent()
+                .build()
+        else
+            ResponseEntity.notFound()
+                .build()
+    }
 
     private fun UserRequest.toModel(): User =
         User(
@@ -43,6 +63,4 @@ class UserController(
             uuid = this.id,
             email = this.email
         )
-
-
 }

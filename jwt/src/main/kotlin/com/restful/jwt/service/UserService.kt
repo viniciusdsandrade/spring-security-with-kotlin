@@ -31,5 +31,7 @@ class UserService(
         return userRepository.findAll()
     }
 
-
+    fun deleteByUUID(uuid: UUID): Boolean {
+        return userRepository.deleteByUUID(uuid)
+    }
 }
