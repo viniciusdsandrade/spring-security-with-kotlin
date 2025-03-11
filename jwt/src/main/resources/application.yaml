@@ -2,3 +2,14 @@ jwt:
   key: ${JWT_KEY}
   access-token-expiration: 3600000
   refresh-token-expiration: 8640000
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_auth
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
