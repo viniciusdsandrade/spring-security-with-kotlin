@@ -28,7 +28,7 @@ class UserRepository {
     }
 
     fun findByEmail(email: String): User? {
-        return null
+        return users.firstOrNull { it.email == email }
     }
 
     fun findByUUID(uuid: UUID): User? =
