@@ -15,14 +15,14 @@ class UserRepository(
     private val users = mutableListOf(
         User(
             id = randomUUID(),
-            email = "",
-            password = encoder.encode("password"),
+            email = "vinicius_andrade2010@hotmail.com",
+            password = encoder.encode("meuLoginGmail2025@#"),
             role = Role.USER
         ),
         User(
             id = randomUUID(),
-            email = "",
-            password = encoder.encode("password"),
+            email = "viniciusdsandrade0662@gmail.com",
+            password = encoder.encode("meuLoginGmail2025@#"),
             role = Role.ADMIN
         )
     )
@@ -52,6 +52,4 @@ class UserRepository(
             true
         } else false
     }
-
-
 }

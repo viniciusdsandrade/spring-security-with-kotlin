@@ -34,7 +34,7 @@ class TokenService(
      *                         Nota: Este parâmetro não está sendo utilizado na implementação atual.
      * @return Token JWT gerado.
      */
-    fun generate(
+    fun generateAccessToken(
         userDetails: UserDetails,
         expirationDate: Date,
         additionalClains: Map<String, Any> = emptyMap()

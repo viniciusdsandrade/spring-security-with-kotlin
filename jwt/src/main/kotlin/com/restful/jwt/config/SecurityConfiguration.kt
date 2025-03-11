@@ -53,7 +53,9 @@ class SecurityConfiguration(
                 it
                     .requestMatchers("/api/auth", "/api/auth/refresh", "/error")
                     .permitAll()
-                    .requestMatchers(POST, "/api/users")
+                    .requestMatchers(POST, "/api/user")
+                    .permitAll()
+                    .requestMatchers("/api/user/**")
                     .hasRole("ADMIN")
                     .anyRequest()
                     .fullyAuthenticated()

@@ -13,9 +13,8 @@ import java.util.*
 
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/user")
 class UserController(
-
     private val userService: UserService
 ) {
 
