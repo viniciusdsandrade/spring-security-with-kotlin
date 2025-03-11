@@ -2,29 +2,34 @@ package com.restful.jwt.repository
 
 import com.restful.jwt.model.Role
 import com.restful.jwt.model.User
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Repository
 import java.util.UUID
+import java.util.UUID.randomUUID
 
 @Repository
-class UserRepository {
+class UserRepository(
+    private val encoder: PasswordEncoder
+) {
 
     private val users = mutableListOf(
         User(
-            id = UUID.randomUUID(),
+            id = randomUUID(),
             email = "",
-            password = "password",
+            password = encoder.encode("password"),
             role = Role.USER
         ),
         User(
-            id = UUID.randomUUID(),
+            id = randomUUID(),
             email = "",
-            password = "password",
+            password = encoder.encode("password"),
             role = Role.ADMIN
         )
     )
 
     fun save(user: User): Boolean {
-        return true
+        val updated = user.copy(password = encoder.encode(user.password))
+        return users.add(updated)
     }
 
     fun findByEmail(email: String): User? {
