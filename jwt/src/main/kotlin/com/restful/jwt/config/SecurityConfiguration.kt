@@ -53,8 +53,8 @@ class SecurityConfiguration(
                 it
                     .requestMatchers("/api/auth", "/api/auth/refresh", "/error")
                     .permitAll()
-                    .requestMatchers(POST, "/api/user")
-                    .permitAll()
+                    .requestMatchers(POST, "/api/user/create")
+                    .permitAll() // Permite o acesso a criação de usuário para todos
                     .requestMatchers("/api/user/**")
                     .hasRole("ADMIN")
                     .anyRequest()
