@@ -1,6 +1,6 @@
 package com.restful.jwt.service
 
-import com.restful.jwt.config.JwtProperties
+import com.restful.jwt.dto.JwtProperties
 import com.restful.jwt.dto.AuthenticationRequest
 import com.restful.jwt.dto.AuthenticationResponse
 import com.restful.jwt.model.RefreshToken
@@ -34,7 +34,12 @@ class AuthenticationService(
         val refreshToken = generateRefreshToken(user)
 
         // Persiste o refresh token no banco
-        refreshTokenRepository.save(RefreshToken(token = refreshToken, username = user.username))
+        refreshTokenRepository.save(
+            RefreshToken(
+                token = refreshToken,
+                username = user.username
+            )
+        )
 
         return AuthenticationResponse(
             accessToken = accessToken,

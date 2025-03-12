@@ -1,6 +1,6 @@
 package com.restful.jwt.service
 
-import com.restful.jwt.config.JwtProperties
+import com.restful.jwt.dto.JwtProperties
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys

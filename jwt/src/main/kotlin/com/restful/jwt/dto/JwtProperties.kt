@@ -1,4 +1,4 @@
-package com.restful.jwt.config
+package com.restful.jwt.dto
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

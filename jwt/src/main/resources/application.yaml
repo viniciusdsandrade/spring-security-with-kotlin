@@ -4,7 +4,7 @@ jwt:
   refresh-token-expiration: 8640000
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/db_auth
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   jpa:

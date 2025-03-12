@@ -1,4 +1,4 @@
-package com.restful.jwt.controller.auth
+package com.restful.jwt.controller
 
 import com.restful.jwt.dto.AuthenticationRequest
 import com.restful.jwt.dto.AuthenticationResponse
