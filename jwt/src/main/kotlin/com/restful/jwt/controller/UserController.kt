@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 import java.util.*
+import java.util.UUID.randomUUID
 
 
 @RestController
@@ -28,8 +29,7 @@ class UserController(
 
     @GetMapping
     fun listAllUsers(): List<UserResponse> =
-        userService.findAll()
-            .map { it.toResponse() }
+        userService.findAll().map { it.toResponse() }
 
     @GetMapping("/{uuid}")
     fun findUserById(@PathVariable uuid: UUID): UserResponse =
@@ -39,19 +39,17 @@ class UserController(
 
     @DeleteMapping("/{uuid}")
     fun deleteUserById(@PathVariable uuid: UUID): ResponseEntity<Boolean> {
-        val sucess = userService.deleteByUUID(uuid)
-
-        return if (sucess)
-            ResponseEntity.noContent()
-                .build()
-        else
-            ResponseEntity.notFound()
-                .build()
+        val success = userService.deleteByUUID(uuid)
+        return if (success) {
+            ResponseEntity.noContent().build()
+        } else {
+            ResponseEntity.notFound().build()
+        }
     }
 
     private fun UserRequest.toModel(): User =
         User(
-            id = UUID.randomUUID(),
+            id = randomUUID(),
             email = this.email,
             password = this.password,
             role = Role.USER

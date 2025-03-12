@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 
 typealias ApplicationUser = com.restful.jwt.model.User
 
-@Service
+@Service("customUserDetailsService")
 class CustomUserDetailsService(
     private val userRepository: UserRepository
 ) : UserDetailsService {

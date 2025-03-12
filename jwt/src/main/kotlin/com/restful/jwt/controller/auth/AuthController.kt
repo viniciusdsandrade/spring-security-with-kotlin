@@ -5,7 +5,7 @@ import com.restful.jwt.dto.AuthenticationResponse
 import com.restful.jwt.dto.RefreshTokenRequest
 import com.restful.jwt.dto.TokenResponse
 import com.restful.jwt.service.AuthenticationService
-import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.FORBIDDEN
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,24 +15,19 @@ import org.springframework.web.server.ResponseStatusException
 @RestController
 @RequestMapping("/api/auth")
 class AuthController(
-    private val authenticatinService: AuthenticationService
+    private val authenticationService: AuthenticationService
 ) {
 
     @PostMapping
     fun authenticate(@RequestBody authRequest: AuthenticationRequest): AuthenticationResponse =
-        authenticatinService.authentication(authRequest)
+        authenticationService.authentication(authRequest)
 
     @PostMapping("/refresh")
-    fun refreshAccessToken(
-        @RequestBody request: RefreshTokenRequest
-    ): TokenResponse =
-        authenticatinService.refreshAccessToken(request.token)
+    fun refreshAccessToken(@RequestBody request: RefreshTokenRequest): TokenResponse =
+        authenticationService.refreshAccessToken(request.token)
             ?.mapToTokenResponse()
-            ?: throw ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid token")
+            ?: throw ResponseStatusException(FORBIDDEN, "Invalid token")
 
     private fun String.mapToTokenResponse(): TokenResponse =
-        TokenResponse(
-            token = this
-        )
-
+        TokenResponse(token = this)
 }

@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class JwtApplication
 
 fun main(args: Array<String>) {
-	runApplication<JwtApplication>(*args)
+    runApplication<JwtApplication>(*args)
 }
