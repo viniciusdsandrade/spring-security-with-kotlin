@@ -5,8 +5,8 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 
-@Entity
-@Table(name = "refresh_tokens")
+@Entity(name = "RefreshToken")
+@Table(name = "tb_refresh_tokens")
 data class RefreshToken(
     @Id
     val token: String,

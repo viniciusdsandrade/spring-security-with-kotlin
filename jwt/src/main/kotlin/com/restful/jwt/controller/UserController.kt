@@ -5,6 +5,7 @@ import com.restful.jwt.dto.UserResponse
 import com.restful.jwt.model.Role
 import com.restful.jwt.model.User
 import com.restful.jwt.service.UserService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -20,7 +21,7 @@ class UserController(
 ) {
 
     @PostMapping("/create")
-    fun createUser(@RequestBody userRequest: UserRequest): UserResponse =
+    fun createUser(@Valid  @RequestBody userRequest: UserRequest): UserResponse =
         userService.createUser(
             user = userRequest.toModel()
         )

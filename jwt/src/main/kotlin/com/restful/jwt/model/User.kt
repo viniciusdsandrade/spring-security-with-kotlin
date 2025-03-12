@@ -5,7 +5,7 @@ import jakarta.persistence.EnumType.STRING
 import java.util.UUID
 import java.util.UUID.randomUUID
 
-@Entity
+@Entity(name = "User")
 @Table(
     name = "tb_users",
     uniqueConstraints = [

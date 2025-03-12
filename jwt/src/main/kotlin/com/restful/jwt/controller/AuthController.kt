@@ -5,6 +5,7 @@ import com.restful.jwt.dto.AuthenticationResponse
 import com.restful.jwt.dto.RefreshTokenRequest
 import com.restful.jwt.dto.TokenResponse
 import com.restful.jwt.service.AuthenticationService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus.FORBIDDEN
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -19,7 +20,7 @@ class AuthController(
 ) {
 
     @PostMapping
-    fun authenticate(@RequestBody authRequest: AuthenticationRequest): AuthenticationResponse =
+    fun authenticate(@Valid @RequestBody authRequest: AuthenticationRequest): AuthenticationResponse =
         authenticationService.authentication(authRequest)
 
     @PostMapping("/refresh")
