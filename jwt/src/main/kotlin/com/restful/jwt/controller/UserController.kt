@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException
 import java.util.*
 import java.util.UUID.randomUUID
 
-
+@CrossOrigin(origins = ["http://localhost:5173"])
 @RestController
 @RequestMapping("/api/user")
 class UserController(
