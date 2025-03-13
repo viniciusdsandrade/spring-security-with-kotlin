@@ -1,9 +1,9 @@
 package com.restful.jwt.controller
 
-import com.restful.jwt.dto.AuthenticationRequest
-import com.restful.jwt.dto.AuthenticationResponse
-import com.restful.jwt.dto.RefreshTokenRequest
-import com.restful.jwt.dto.TokenResponse
+import com.restful.jwt.dto.auth.AuthenticationRequest
+import com.restful.jwt.dto.auth.AuthenticationResponse
+import com.restful.jwt.dto.auth.RefreshTokenRequest
+import com.restful.jwt.dto.auth.TokenResponse
 import com.restful.jwt.service.AuthenticationService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus.FORBIDDEN

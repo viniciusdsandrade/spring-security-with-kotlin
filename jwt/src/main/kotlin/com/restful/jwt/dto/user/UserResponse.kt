@@ -1,4 +1,4 @@
-package com.restful.jwt.dto
+package com.restful.jwt.dto.user
 
 import java.util.UUID
 

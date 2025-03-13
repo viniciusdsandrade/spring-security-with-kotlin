@@ -1,7 +1,7 @@
 package com.restful.jwt.controller
 
-import com.restful.jwt.dto.UserRequest
-import com.restful.jwt.dto.UserResponse
+import com.restful.jwt.dto.user.UserRequest
+import com.restful.jwt.dto.user.UserResponse
 import com.restful.jwt.model.Role
 import com.restful.jwt.model.User
 import com.restful.jwt.service.UserService

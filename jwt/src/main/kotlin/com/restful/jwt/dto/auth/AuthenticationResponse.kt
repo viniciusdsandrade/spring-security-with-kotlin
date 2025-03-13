@@ -1,4 +1,4 @@
-package com.restful.jwt.dto
+package com.restful.jwt.dto.auth
 
 data class AuthenticationResponse(
     val accessToken: String,

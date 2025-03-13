@@ -1,4 +1,4 @@
-package com.restful.jwt.dto
+package com.restful.jwt.dto.auth
 
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank

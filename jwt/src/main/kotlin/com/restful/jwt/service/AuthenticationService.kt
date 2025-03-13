@@ -1,8 +1,8 @@
 package com.restful.jwt.service
 
-import com.restful.jwt.dto.JwtProperties
-import com.restful.jwt.dto.AuthenticationRequest
-import com.restful.jwt.dto.AuthenticationResponse
+import com.restful.jwt.dto.auth.JwtProperties
+import com.restful.jwt.dto.auth.AuthenticationRequest
+import com.restful.jwt.dto.auth.AuthenticationResponse
 import com.restful.jwt.model.RefreshToken
 import com.restful.jwt.repository.RefreshTokenRepository
 import org.springframework.security.authentication.AuthenticationManager
