@@ -5,8 +5,8 @@ jwt:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
-    username: ${POSTGRES_USER}
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB:db_auth}
+    username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD}
   jpa:
     show-sql: true

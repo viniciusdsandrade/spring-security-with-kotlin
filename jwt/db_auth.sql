@@ -5,11 +5,16 @@
 DROP DATABASE IF EXISTS db_auth;
 CREATE DATABASE db_auth;
 
--- Para visualizar as tabelas do esquema "public" (no banco de dados atual)
-\d public.tb_users
+-- Conecte-se ao banco de dados "db_auth"
+\c db_auth
 
--- Se você precisar conectar-se a outro banco, por exemplo, "db_login"
-\c db_login
+-- Seleciona o email e o role de todos os usuários
+SELECT email "Email principal", role "Cargo"
+FROM tb_users;
 
--- E então realizar uma consulta
-SELECT * FROM tb_users;
+-- Consulta para listar todas as tabelas de um banco de dados
+SELECT table_schema, table_name
+FROM information_schema.tables
+WHERE table_schema NOT IN ('pg_catalog', 'information_schema')
+  AND table_type = 'BASE TABLE'
+ORDER BY table_schema, table_name;

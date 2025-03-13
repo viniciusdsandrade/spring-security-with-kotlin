@@ -33,7 +33,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.postgresql:postgresql")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-
+	implementation("io.swagger.core.v3:swagger-annotations:2.2.28")
+	implementation("io.swagger:swagger-annotations:1.6.14")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
 	compileOnly("org.projectlombok:lombok")
