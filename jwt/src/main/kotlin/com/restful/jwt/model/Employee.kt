@@ -8,7 +8,13 @@ import jakarta.persistence.EnumType.STRING
 import jakarta.persistence.FetchType.LAZY
 
 @Entity(name = "Employee")
-@Table(name = "tb_employees")
+@Table(
+    name = "tb_employees",
+    uniqueConstraints = [
+        UniqueConstraint(columnNames = ["email"]),
+        UniqueConstraint(columnNames = ["cpf"])
+    ]
+)
 data class Employee(
 
     @Id

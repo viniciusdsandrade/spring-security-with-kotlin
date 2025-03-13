@@ -12,9 +12,15 @@ CREATE DATABASE db_auth;
 SELECT email "Email principal", role "Cargo"
 FROM tb_users;
 
+SELECT * FROM tb_employees;
+
+
+
+
 -- Consulta para listar todas as tabelas de um banco de dados
 SELECT table_schema, table_name
 FROM information_schema.tables
 WHERE table_schema NOT IN ('pg_catalog', 'information_schema')
   AND table_type = 'BASE TABLE'
 ORDER BY table_schema, table_name;
+
