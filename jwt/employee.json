@@ -1,17 +1,17 @@
 {
-  "name": "Fulano",
-  "cpf": "999.999.999-99",
-  "email": "fulano@example.com",
-  "password": "1234",
-  "phone": "11999999999",
+  "name": "Vinícius dos Santos Andrade",
+  "cpf": "447.841.608-76",
+  "email": "viniciusdsandrade0662@gmail.com",
+  "password": "meuLoginGmail2025@",
+  "phone": "(11)97413-3884",
   "additionalInfo": "Qualquer texto aqui",
   "address": {
-    "logradouro": "Rua A",
-    "bairro": "Bairro B",
-    "cep": "00000-000",
-    "numero": "123",
-    "complemento": "Apt 45",
-    "cidade": "São Paulo",
+    "logradouro": "Rua Orlando de Oliveira",
+    "bairro": "Bairro Jardim São Marcos",
+    "cep": "13082-205",
+    "numero": "375",
+    "complemento": "",
+    "cidade": "Campinas",
     "uf": "SP"
   }
 }

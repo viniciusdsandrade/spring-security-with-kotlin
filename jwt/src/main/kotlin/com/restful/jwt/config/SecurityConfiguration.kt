@@ -25,17 +25,24 @@ class SecurityConfiguration(
         jwtAuthenticationFilter: JwtAuthenticationFilter
     ): DefaultSecurityFilterChain =
         http
-            // Ativa o CORS e utiliza a configuração definida no bean corsConfigurationSource()
+            // Ativa o CORS usando o bean corsConfigurationSource()
             .cors { it.configurationSource(corsConfigurationSource()) }
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
+                    // Libera /api/auth, /api/auth/refresh e /error
                     .requestMatchers("/api/auth", "/api/auth/refresh", "/error")
                     .permitAll()
-                    .requestMatchers(POST, "/api/user/create")
-                    .permitAll() // Permite criação de usuário sem autenticação
+
+                    // Libera criação de usuário e employee sem autenticação
+                    .requestMatchers(POST, "/api/user/create", "/api/employee/create")
+                    .permitAll()
+
+                    // Exemplo: exige ADMIN para /api/user/** (exceto /create)
                     .requestMatchers("/api/user/**")
                     .hasRole("ADMIN")
+
+                    // Qualquer outra rota requer autenticação
                     .anyRequest()
                     .fullyAuthenticated()
             }
