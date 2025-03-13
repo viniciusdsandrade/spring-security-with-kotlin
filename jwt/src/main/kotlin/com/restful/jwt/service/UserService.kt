@@ -1,6 +1,6 @@
 package com.restful.jwt.service
 
-import com.restful.jwt.model.User
+import com.restful.jwt.model.security.User
 import com.restful.jwt.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service

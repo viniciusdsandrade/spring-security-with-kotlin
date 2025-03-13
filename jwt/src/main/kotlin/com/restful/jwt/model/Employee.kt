@@ -1,6 +1,8 @@
 package com.restful.jwt.model
 
 import com.restful.jwt.dto.employee.EmployeeResponse
+import com.restful.jwt.model.enumerated.Role
+import com.restful.jwt.model.security.User
 import jakarta.persistence.*
 import java.util.*
 import java.util.UUID.randomUUID

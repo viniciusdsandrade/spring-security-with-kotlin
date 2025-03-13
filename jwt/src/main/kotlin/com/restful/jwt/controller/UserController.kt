@@ -2,8 +2,8 @@ package com.restful.jwt.controller
 
 import com.restful.jwt.dto.user.UserRequest
 import com.restful.jwt.dto.user.UserResponse
-import com.restful.jwt.model.Role
-import com.restful.jwt.model.User
+import com.restful.jwt.model.enumerated.Role
+import com.restful.jwt.model.security.User
 import com.restful.jwt.service.UserService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus.*

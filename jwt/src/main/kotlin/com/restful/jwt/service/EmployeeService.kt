@@ -3,8 +3,8 @@ package com.restful.jwt.service
 import com.restful.jwt.dto.employee.EmployeeRequest
 import com.restful.jwt.dto.employee.EmployeeResponse
 import com.restful.jwt.model.Employee
-import com.restful.jwt.model.Role
-import com.restful.jwt.model.User
+import com.restful.jwt.model.enumerated.Role
+import com.restful.jwt.model.security.User
 import com.restful.jwt.repository.EmployeeRepository
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service

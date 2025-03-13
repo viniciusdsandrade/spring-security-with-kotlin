@@ -1,8 +1,7 @@
 package com.restful.jwt.repository
 
-import com.restful.jwt.model.RefreshToken
+import com.restful.jwt.model.security.RefreshToken
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Repository
 
 @Repository("refreshTokenRepository")

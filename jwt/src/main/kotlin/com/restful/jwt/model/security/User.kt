@@ -1,5 +1,6 @@
-package com.restful.jwt.model
+package com.restful.jwt.model.security
 
+import com.restful.jwt.model.enumerated.Role
 import jakarta.persistence.*
 import jakarta.persistence.EnumType.STRING
 import java.util.UUID

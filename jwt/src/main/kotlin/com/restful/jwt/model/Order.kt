@@ -1,5 +1,6 @@
 package com.restful.jwt.model
 
+import com.restful.jwt.model.enumerated.OrderStatus
 import jakarta.persistence.*
 import java.util.*
 import java.util.UUID.randomUUID

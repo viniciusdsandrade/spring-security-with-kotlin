@@ -1,4 +1,4 @@
-package com.restful.jwt.model
+package com.restful.jwt.model.security
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id

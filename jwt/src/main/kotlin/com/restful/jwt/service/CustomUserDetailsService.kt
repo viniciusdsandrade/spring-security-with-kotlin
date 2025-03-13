@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 
-typealias ApplicationUser = com.restful.jwt.model.User
+typealias ApplicationUser = com.restful.jwt.model.security.User
 
 @Service("customUserDetailsService")
 class CustomUserDetailsService(
