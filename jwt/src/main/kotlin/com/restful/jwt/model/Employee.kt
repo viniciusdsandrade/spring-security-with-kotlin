@@ -35,6 +35,13 @@ data class Employee(
     @Enumerated(STRING)
     val role: Role = Role.EMPLOYEE,
 
+    /**
+     * Associação com o usuário que utiliza fetch do tipo LAZY por diversos motivos:
+     * - Eficiência de Recursos: Carrega os dados do User apenas quando necessário, evitando consultas desnecessárias.
+     * - Melhoria de Performance: Evita o carregamento automático do User em cada consulta de Employee, reduzindo o overhead.
+     * - Redução de Problemas N+1: Minimiza o risco de executar múltiplas consultas adicionais para carregar dados não utilizados.
+     * - Acoplamento Reduzido: Permite operações com Employee sem depender imediatamente dos detalhes do User.
+     */
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     val user: User
