@@ -32,12 +32,21 @@ data class User(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is User) return false
-        return id == other.id
+        return this.id == other.id
     }
 
-    override fun hashCode(): Int = id.hashCode()
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
 
     override fun toString(): String {
-        return "User(id=$id, email='$email', role=$role)"
+        // Por motivos de segurança, é comum mascarar o password ao imprimir a entidade.
+        // Se desejar exibir a senha em texto claro (não recomendado), basta mudar aqui.
+        return "User(" +
+                "id=$id, " +
+                "email='$email', " +
+                "password='[PROTECTED]', " +
+                "role=$role" +
+                ")"
     }
 }

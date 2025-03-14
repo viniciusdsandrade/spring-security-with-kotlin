@@ -52,4 +52,28 @@ data class Employee(
             name = name,
             email = email
         )
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Employee) return false
+        return this.id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
+    override fun toString(): String {
+        return "Employee(" +
+                "id=$id, " +
+                "name='$name', " +
+                "email='$email', " +
+                "phone='$phone', " +
+                "cpf='$cpf', " +
+                "additionalInfo=$additionalInfo, " +
+                "address=$address, " +
+                "role=$role, " +
+                "user=$user" +
+                ")"
+    }
 }
