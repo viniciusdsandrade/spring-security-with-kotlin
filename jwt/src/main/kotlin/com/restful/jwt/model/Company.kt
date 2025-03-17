@@ -1,5 +1,6 @@
 package com.restful.jwt.model
 
+import com.restful.jwt.dto.company.CompanyResponse
 import jakarta.persistence.*
 import java.util.*
 import java.util.UUID.randomUUID
@@ -33,6 +34,13 @@ data class Company(
     val employees: Set<Employee> = emptySet()
 ) {
 
+    fun toResponse(): CompanyResponse = CompanyResponse(
+        name = name,
+        email = email,
+        phone = phone,
+        cnpj = cnpj,
+    )
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Company) return false
@@ -41,6 +49,19 @@ data class Company(
 
     override fun hashCode(): Int {
         return id.hashCode()
+    }
+
+    override fun toString(): String {
+        return "Company(" +
+                "id=$id, " +
+                "name='$name', " +
+                "email='$email', " +
+                "phone='$phone', " +
+                "cnpj='$cnpj', " +
+                "additionalInfo=$additionalInfo, " +
+                "address=$address, " +
+                "employees=$employees" +
+                ")"
     }
 }
 
