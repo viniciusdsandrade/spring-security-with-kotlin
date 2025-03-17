@@ -13,7 +13,7 @@ SELECT email "Email principal", role "Cargo"
 FROM tb_users;
 
 SELECT * FROM tb_employees;
-
+SELECT * FROM tb_companies;
 
 
 

@@ -34,8 +34,8 @@ class SecurityConfiguration(
                     .requestMatchers("/api/auth", "/api/auth/refresh", "/error")
                     .permitAll()
 
-                    // Libera criação de usuário e employee sem autenticação
-                    .requestMatchers(POST, "/api/user/create", "/api/employee/create")
+                    // Libera criação de usuário, employee e company sem autenticação
+                    .requestMatchers(POST, "/api/user/create", "/api/employee/create", "/api/company/create")
                     .permitAll()
 
                     // Exemplo: exige ADMIN para /api/user/** (exceto /create)

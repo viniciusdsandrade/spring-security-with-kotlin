@@ -1,0 +1,17 @@
+{
+  "name": "Tech Solutions Ltda",
+  "email": "contato@techsolutions.com",
+  "password": "SenhaForte2025@",
+  "phone": "11987654321",
+  "cnpj": "12.345.678/0001-95",
+  "additionalInfo": "Empresa especializada em soluções tecnológicas",
+  "address": {
+    "logradouro": "Avenida Paulista",
+    "bairro": "Bela Vista",
+    "cep": "01311-200",
+    "numero": "1000",
+    "complemento": "Sala 101",
+    "cidade": "São Paulo",
+    "uf": "SP"
+  }
+}
