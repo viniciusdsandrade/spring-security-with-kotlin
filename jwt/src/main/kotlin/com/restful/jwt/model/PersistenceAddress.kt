@@ -19,7 +19,9 @@ import java.util.UUID.randomUUID
 data class PersistentAddress(
 
     @Id
+    @Column(name = "id", nullable = false)
     val id: UUID = randomUUID(),
+
     val cep: String,
     val logradouro: String,
     val numero: String, // Número é obrigatório para identificar o endereço único
@@ -52,5 +54,35 @@ data class PersistentAddress(
             ddd = ddd,
             siafi = siafi
         )
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is PersistentAddress) return false
+        return this.id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
+    override fun toString(): String {
+        return "PersistentAddress(" +
+                "id=$id, " +
+                "cep='$cep', " +
+                "logradouro='$logradouro', " +
+                "numero='$numero', " +
+                "complemento=$complemento, " +
+                "unidade=$unidade, " +
+                "bairro='$bairro', " +
+                "localidade='$localidade', " +
+                "uf='$uf', " +
+                "estado='$estado', " +
+                "regiao='$regiao', " +
+                "ibge='$ibge', " +
+                "gia='$gia', " +
+                "ddd='$ddd', " +
+                "siafi='$siafi'" +
+                ")"
     }
 }

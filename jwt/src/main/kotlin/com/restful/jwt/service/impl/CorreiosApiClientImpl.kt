@@ -6,7 +6,7 @@ import com.restful.jwt.service.CorreiosApiClient
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
-@Service
+@Service("correiosApiClient")
 class CorreiosApiClientImpl(
     private val restTemplate: RestTemplate
 ) : CorreiosApiClient  {

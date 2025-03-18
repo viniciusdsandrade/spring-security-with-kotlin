@@ -6,8 +6,8 @@ import com.restful.jwt.service.AddressService
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
-@Service
 @Transactional
+@Service("addressService")
 class AddressServiceImpl(
     private val addressRepository: AddressRepository
 ) : AddressService {
