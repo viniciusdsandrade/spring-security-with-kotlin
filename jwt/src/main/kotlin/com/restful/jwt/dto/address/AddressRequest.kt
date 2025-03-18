@@ -1,10 +1,19 @@
 package com.restful.jwt.dto.address
 
 import com.restful.jwt.model.Address
+import jakarta.validation.constraints.Pattern
 
 data class AddressRequest(
+    @field:Pattern(
+        regexp = "^(\\d{8}|\\d{2}\\.\\d{3}-\\d{3})\$",
+        message = "CEP deve estar no formato 13082205 ou 13.082-205"
+    )
     val cep: String? = null,
     val logradouro: String? = null,
+    @field:Pattern(
+        regexp = "^[A-Za-z0-9]{0,10}\$",
+        message = "Número deve conter apenas letras e números, com no máximo 10 caracteres"
+    )
     val numero: String? = null,
     val complemento: String? = null,
     val unidade: String? = null,

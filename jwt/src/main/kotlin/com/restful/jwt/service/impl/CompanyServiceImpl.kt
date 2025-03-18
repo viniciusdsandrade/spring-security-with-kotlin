@@ -7,10 +7,10 @@ import com.restful.jwt.model.PersistentAddress
 import com.restful.jwt.model.enumerated.Role
 import com.restful.jwt.model.security.User
 import com.restful.jwt.repository.CompanyRepository
-import com.restful.jwt.repository.AddressRepository
 import com.restful.jwt.service.CompanyService
 import com.restful.jwt.service.UserService
 import com.restful.jwt.service.CorreiosApiClient // Certifique-se de ter essa classe implementada
+import com.restful.jwt.service.AddressService      // Injeção do AddressService
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import java.util.*
@@ -22,7 +22,7 @@ class CompanyServiceImpl(
     private val userService: UserService,
     private val companyRepository: CompanyRepository,
     private val correiosApiClient: CorreiosApiClient, // Injeção da dependência do cliente da API dos Correios
-    private val addressRepository: AddressRepository  // Repositório para PersistentAddress
+    private val addressService: AddressService        // Injeção do AddressService para persistir endereços
 ) : CompanyService {
 
     override fun createCompany(companyRequest: CompanyRequest): CompanyResponse {
@@ -53,7 +53,6 @@ class CompanyServiceImpl(
                         numero = addressRequest.numero ?: addressFromCorreios.numero
                     )
                 } else {
-                    // Se a API não retornar dados válidos, lança uma exceção
                     throw IllegalArgumentException("CEP inválido ou endereço não encontrado na API dos Correios")
                 }
             } else {
@@ -61,9 +60,8 @@ class CompanyServiceImpl(
             }
         }
 
-        // 4) Persiste o endereço, garantindo que não haja duplicidade (mesmo CEP e número)
+        // 4) Persiste o endereço utilizando o AddressService, garantindo que não haja duplicidade (mesmo CEP e número)
         val persistentAddress: PersistentAddress? = finalAddress?.let { addr ->
-            // Cria o objeto PersistentAddress a partir do Address (finalAddress)
             val newPersistentAddress = PersistentAddress(
                 id = randomUUID(),
                 cep = addr.cep!!,
@@ -81,22 +79,14 @@ class CompanyServiceImpl(
                 ddd = addr.ddd ?: "",
                 siafi = addr.siafi ?: ""
             )
-
-            // Verifica se já existe um endereço com o mesmo CEP e número
-            if (addressRepository.existsByCepAndNumero(newPersistentAddress.cep, newPersistentAddress.numero)) {
-                // Se já existir, retorna o endereço persistido
-                addressRepository.findByCepAndNumero(newPersistentAddress.cep, newPersistentAddress.numero)
-            } else {
-                // Se não existir, salva o novo endereço no banco de dados
-                addressRepository.save(newPersistentAddress)
-            }
+            // O AddressService já implementa a lógica de evitar duplicidade.
+            addressService.saveAddress(newPersistentAddress)
         }
 
+        // Converte o PersistentAddress para o tipo Address (embeddable) usado na Company
         val address = persistentAddress?.toModel()
 
-
         // 5) Monta a Company com base no CompanyRequest, utilizando o endereço persistido
-        // (Supondo que sua entidade Company foi adaptada para referenciar PersistentAddress)
         val company = Company(
             name = companyRequest.name,
             email = companyRequest.email,
