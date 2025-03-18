@@ -30,8 +30,8 @@ class SecurityConfiguration(
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    // Libera /api/auth, /api/auth/refresh e /error
-                    .requestMatchers("/api/auth", "/api/auth/refresh", "/error")
+                    // Libera endpoints de autenticação, erro e a API dos Correios (/api/address/**)
+                    .requestMatchers("/api/auth", "/api/auth/refresh", "/error", "/api/address/**")
                     .permitAll()
 
                     // Libera criação de usuário, employee e company sem autenticação

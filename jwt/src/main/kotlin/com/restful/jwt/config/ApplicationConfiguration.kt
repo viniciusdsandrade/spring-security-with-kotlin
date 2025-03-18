@@ -13,10 +13,14 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.web.client.RestTemplate
 
 @Configuration
 @EnableConfigurationProperties(JwtProperties::class)
 class ApplicationConfig { // Renomeado de 'Configuration' para evitar ambiguidade
+
+    @Bean
+    fun restTemplate(): RestTemplate = RestTemplate()
 
     @Bean
     fun userDetailsService(userRepository: UserRepository): UserDetailsService =
