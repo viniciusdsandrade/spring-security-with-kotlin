@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/address")
-class CorreiosController(private val correiosApiClient: CorreiosApiClient) {
-
+@RequestMapping("/api/cep")
+class CorreiosController(
+    private val correiosApiClient: CorreiosApiClient
+) {
     @GetMapping("/{cep}")
     fun getAddress(@PathVariable cep: String): ResponseEntity<Any> {
         val address = correiosApiClient.getAddressByCep(cep)

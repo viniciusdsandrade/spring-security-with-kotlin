@@ -31,7 +31,13 @@ class SecurityConfiguration(
             .authorizeHttpRequests {
                 it
                     // Libera endpoints de autenticação, erro e a API dos Correios (/api/address/**)
-                    .requestMatchers("/api/auth", "/api/auth/refresh", "/error", "/api/address/**")
+                    .requestMatchers(
+                        "/api/auth",
+                        "/api/auth/refresh",
+                        "/error",
+                        "/api/address/**",
+                        "/api/cep/**"
+                    )
                     .permitAll()
 
                     // Libera criação de usuário, employee e company sem autenticação
