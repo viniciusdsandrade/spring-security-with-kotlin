@@ -1,6 +1,6 @@
 package com.restful.jwt.service.impl
 
-import com.restful.jwt.dto.CorreiosResponse
+import com.restful.jwt.dto.correios.CorreiosResponse
 import com.restful.jwt.model.Address
 import com.restful.jwt.service.CorreiosApiClient
 import org.springframework.stereotype.Service

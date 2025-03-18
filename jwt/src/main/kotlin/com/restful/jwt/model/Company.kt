@@ -1,5 +1,6 @@
 package com.restful.jwt.model
 
+import com.restful.jwt.dto.address.AddressResponse
 import com.restful.jwt.dto.company.CompanyResponse
 import jakarta.persistence.*
 import java.util.*
@@ -39,6 +40,19 @@ data class Company(
         email = email,
         phone = phone,
         cnpj = cnpj,
+        additionalInfo = additionalInfo,
+        address = address?.let { addr ->
+            AddressResponse(
+                cep = addr.cep ?: "",
+                logradouro = addr.logradouro ?: "",
+                bairro = addr.bairro ?: "",
+                localidade = addr.localidade ?: "",
+                uf = addr.uf ?: "",
+                estado = addr.estado ?: "",
+                regiao = addr.regiao ?: "",
+                ddd = addr.ddd ?: ""
+            )
+        }
     )
 
     override fun equals(other: Any?): Boolean {

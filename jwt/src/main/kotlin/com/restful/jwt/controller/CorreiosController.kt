@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/address")
-class AddressController(private val correiosApiClient: CorreiosApiClient) {
+class CorreiosController(private val correiosApiClient: CorreiosApiClient) {
 
     @GetMapping("/{cep}")
     fun getAddress(@PathVariable cep: String): ResponseEntity<Any> {

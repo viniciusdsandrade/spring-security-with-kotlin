@@ -1,6 +1,6 @@
 package com.restful.jwt.dto.company
 
-import com.restful.jwt.dto.AddressRequest
+import com.restful.jwt.dto.address.AddressRequest
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank

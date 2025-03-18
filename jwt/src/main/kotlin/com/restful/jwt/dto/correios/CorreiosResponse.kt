@@ -1,4 +1,4 @@
-package com.restful.jwt.dto
+package com.restful.jwt.dto.correios
 
 import com.restful.jwt.model.Address
 
@@ -6,9 +6,12 @@ data class CorreiosResponse(
     val cep: String?,
     val logradouro: String?,
     val complemento: String?,
+    val unidade: String?,
     val bairro: String?,
     val localidade: String?, // corresponde à cidade
     val uf: String?,
+    val estado: String?,
+    val regiao: String?,
     val ibge: String?,
     val gia: String?,
     val ddd: String?,
@@ -16,12 +19,19 @@ data class CorreiosResponse(
 ) {
     // Converte o DTO da API externa para a entidade Address do seu domínio.
     fun toAddress() = Address(
-        logradouro = logradouro,
-        bairro = bairro,
         cep = cep,
+        logradouro = logradouro,
+        numero = null, // o número não é retornado pela API; será preenchido via request
         complemento = complemento,
-        cidade = localidade,
+        unidade = unidade,
+        bairro = bairro,
+        localidade = localidade,
         uf = uf,
-        numero = null // o número não é retornado pela API
+        estado = estado,
+        regiao = regiao,
+        ibge = ibge,
+        gia = gia,
+        ddd = ddd,
+        siafi = siafi
     )
 }
