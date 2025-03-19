@@ -1,11 +1,11 @@
 package com.restful.jwt.service
 
-// UserServiceImplTest.kt
 import com.restful.jwt.model.enumerated.Role
 import com.restful.jwt.model.security.User
 import com.restful.jwt.repository.UserRepository
 import com.restful.jwt.service.impl.UserServiceImpl
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.ArgumentMatchers.any
@@ -28,8 +28,9 @@ class UserServiceImplTest {
     @InjectMocks
     lateinit var userService: UserServiceImpl
 
+    @DisplayName("deve criar usuário quando não existir")
     @Test
-    fun `deve criar usuário quando não existir`() {
+    fun should_create_user_when_not_exists() {
         val email = "test@example.com"
         val rawPassword = "password"
         val encodedPassword = "encodedPassword"
@@ -48,8 +49,9 @@ class UserServiceImplTest {
         verify(userRepository, times(1)).save(any(User::class.java))
     }
 
+    @DisplayName("não deve criar usuário quando já existir")
     @Test
-    fun `não deve criar usuário quando já existir`() {
+    fun should_not_create_user_when_already_exists() {
         val email = "test@example.com"
         val user = User(id = UUID.randomUUID(), email = email, password = "password", role = Role.USER)
         `when`(userRepository.findByEmail(email)).thenReturn(user)
@@ -60,8 +62,9 @@ class UserServiceImplTest {
         verify(userRepository, never()).save(any(User::class.java))
     }
 
+    @DisplayName("deve encontrar usuário pelo UUID")
     @Test
-    fun `deve encontrar usuário pelo UUID`() {
+    fun should_find_user_by_uuid() {
         val uuid = UUID.randomUUID()
         val user = User(id = uuid, email = "test@example.com", password = "password", role = Role.USER)
         `when`(userRepository.findById(uuid)).thenReturn(Optional.of(user))
@@ -72,8 +75,9 @@ class UserServiceImplTest {
         verify(userRepository, times(1)).findById(uuid)
     }
 
+    @DisplayName("deve retornar nulo se usuário não existir pelo UUID")
     @Test
-    fun `deve retornar nulo se usuário não existir pelo UUID`() {
+    fun should_return_null_if_user_does_not_exist_by_uuid() {
         val uuid = UUID.randomUUID()
         `when`(userRepository.findById(uuid)).thenReturn(Optional.empty())
 
@@ -82,8 +86,9 @@ class UserServiceImplTest {
         verify(userRepository, times(1)).findById(uuid)
     }
 
+    @DisplayName("deve encontrar usuário pelo email")
     @Test
-    fun `deve encontrar usuário pelo email`() {
+    fun should_find_user_by_email() {
         val email = "test@example.com"
         val user = User(id = UUID.randomUUID(), email = email, password = "password", role = Role.USER)
         `when`(userRepository.findByEmail(email)).thenReturn(user)
@@ -94,8 +99,9 @@ class UserServiceImplTest {
         verify(userRepository, times(1)).findByEmail(email)
     }
 
+    @DisplayName("deve listar todos os usuários")
     @Test
-    fun `deve listar todos os usuários`() {
+    fun should_list_all_users() {
         val user1 = User(id = UUID.randomUUID(), email = "user1@example.com", password = "pass1", role = Role.USER)
         val user2 = User(id = UUID.randomUUID(), email = "user2@example.com", password = "pass2", role = Role.USER)
         `when`(userRepository.findAll()).thenReturn(listOf(user1, user2))
@@ -105,8 +111,9 @@ class UserServiceImplTest {
         verify(userRepository, times(1)).findAll()
     }
 
+    @DisplayName("deve deletar usuário quando existir")
     @Test
-    fun `deve deletar usuário quando existir`() {
+    fun should_delete_user_when_exists() {
         val uuid = UUID.randomUUID()
         `when`(userRepository.existsById(uuid)).thenReturn(true)
         doNothing().`when`(userRepository).deleteById(uuid)
@@ -117,8 +124,9 @@ class UserServiceImplTest {
         verify(userRepository, times(1)).deleteById(uuid)
     }
 
+    @DisplayName("não deve deletar usuário quando não existir")
     @Test
-    fun `não deve deletar usuário quando não existir`() {
+    fun should_not_delete_user_when_not_exists() {
         val uuid = UUID.randomUUID()
         `when`(userRepository.existsById(uuid)).thenReturn(false)
 
