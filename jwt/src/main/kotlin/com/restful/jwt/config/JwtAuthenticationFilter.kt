@@ -1,7 +1,7 @@
 package com.restful.jwt.config
 
-import com.restful.jwt.service.CustomUserDetailsService
-import com.restful.jwt.service.TokenService
+import com.restful.jwt.service.impl.CustomUserDetailsService
+import com.restful.jwt.service.impl.TokenServiceImpl
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -15,7 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter
 @Component
 class JwtAuthenticationFilter(
     private val userDetailsService: CustomUserDetailsService,
-    private val tokenService: TokenService
+    private val tokenServiceImpl: TokenServiceImpl
 ) : OncePerRequestFilter() {
 
     override fun doFilterInternal(
@@ -31,12 +31,12 @@ class JwtAuthenticationFilter(
         }
 
         val jwtToken = authHeader!!.extractTokenValue()
-        val email = tokenService.extractEmail(jwtToken)
+        val email = tokenServiceImpl.extractEmail(jwtToken)
 
         if (email != null && SecurityContextHolder.getContext().authentication == null) {
             val foundUser = userDetailsService.loadUserByUsername(email)
 
-            if (tokenService.isValid(jwtToken, foundUser)) {
+            if (tokenServiceImpl.isValid(jwtToken, foundUser)) {
                 updateContext(foundUser, request)
             }
         }

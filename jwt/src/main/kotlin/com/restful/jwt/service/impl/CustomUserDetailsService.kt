@@ -1,11 +1,11 @@
-package com.restful.jwt.service
+package com.restful.jwt.service.impl
 
 import com.restful.jwt.repository.UserRepository
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.stereotype.Service
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.stereotype.Service
 
 typealias ApplicationUser = com.restful.jwt.model.security.User
 

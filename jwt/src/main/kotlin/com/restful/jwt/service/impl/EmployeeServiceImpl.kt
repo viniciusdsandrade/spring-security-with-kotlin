@@ -7,6 +7,7 @@ import com.restful.jwt.model.enumerated.Role
 import com.restful.jwt.model.security.User
 import com.restful.jwt.repository.EmployeeRepository
 import com.restful.jwt.service.EmployeeService
+import com.restful.jwt.service.UserService
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import java.util.UUID
@@ -15,7 +16,7 @@ import java.util.UUID.randomUUID
 @Transactional
 @Service("employeeService")
 class EmployeeServiceImpl(
-    private val userServiceImpl: UserServiceImpl,
+    private val userService: UserService,
     private val employeeRepository: EmployeeRepository
 ) : EmployeeService {
 
@@ -29,7 +30,7 @@ class EmployeeServiceImpl(
         )
 
         // 2) Usa o userService para criar o usuário (senha será encriptada no UserService)
-        val savedUser = userServiceImpl.createUser(user)
+        val savedUser = userService.createUser(user)
             ?: throw IllegalArgumentException("Usuário já existe")
 
         // 3) Monta o Employee com base no EmployeeRequest

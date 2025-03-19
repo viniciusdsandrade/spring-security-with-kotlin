@@ -10,6 +10,7 @@ import com.restful.jwt.repository.CompanyRepository
 import com.restful.jwt.service.CompanyService
 import com.restful.jwt.service.CorreiosApiClient // Certifique-se de ter essa classe implementada
 import com.restful.jwt.service.AddressService      // Injeção do AddressService
+import com.restful.jwt.service.UserService
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import java.util.*
@@ -18,7 +19,7 @@ import java.util.UUID.randomUUID
 @Transactional
 @Service("companyService")
 class CompanyServiceImpl(
-    private val userServiceImpl: UserServiceImpl,
+    private val userService: UserService,
     private val companyRepository: CompanyRepository,
     private val correiosApiClient: CorreiosApiClient, // Injeção da dependência do cliente da API dos Correios
     private val addressService: AddressService        // Injeção do AddressService para persistir endereços
@@ -34,7 +35,7 @@ class CompanyServiceImpl(
         )
 
         // 2) Usa o userService para criar o usuário (a senha será encriptada no UserService)
-        val savedUser = userServiceImpl.createUser(user)
+        val savedUser = userService.createUser(user)
             ?: throw IllegalArgumentException("Usuário já existe")
 
         // 3) Processa o endereço:

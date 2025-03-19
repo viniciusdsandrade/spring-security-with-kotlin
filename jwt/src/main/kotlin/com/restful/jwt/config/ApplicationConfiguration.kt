@@ -2,7 +2,7 @@ package com.restful.jwt.config
 
 import com.restful.jwt.dto.auth.JwtProperties
 import com.restful.jwt.repository.UserRepository
-import com.restful.jwt.service.CustomUserDetailsService
+import com.restful.jwt.service.impl.CustomUserDetailsService
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
