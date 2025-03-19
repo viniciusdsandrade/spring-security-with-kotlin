@@ -1,14 +1,12 @@
 package com.restful.jwt.repository
 
-// UserRepositoryTest.kt
 import com.restful.jwt.model.enumerated.Role
 import com.restful.jwt.model.security.User
-import com.restful.jwt.repository.UserRepository
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import java.util.*
 
 @DataJpaTest
 class UserRepositoryTest {
@@ -16,8 +14,9 @@ class UserRepositoryTest {
     @Autowired
     lateinit var userRepository: UserRepository
 
+    @DisplayName("deve salvar e encontrar usuário por email")
     @Test
-    fun `deve salvar e encontrar usuário por email`() {
+    fun should_save_and_find_user_by_email() {
         val email = "test@example.com"
         val user = User(email = email, password = "password", role = Role.USER)
         val savedUser = userRepository.save(user)
@@ -27,8 +26,9 @@ class UserRepositoryTest {
         assertEquals(savedUser.id, foundUser?.id)
     }
 
+    @DisplayName("deve encontrar usuário pelo id")
     @Test
-    fun `deve encontrar usuário pelo id`() {
+    fun should_find_user_by_id() {
         val user = User(email = "test2@example.com", password = "password", role = Role.USER)
         val savedUser = userRepository.save(user)
         val foundUser = userRepository.findById(savedUser.id)
@@ -36,8 +36,9 @@ class UserRepositoryTest {
         assertEquals(savedUser.email, foundUser.get().email)
     }
 
+    @DisplayName("deve lançar exceção ao salvar usuário com email duplicado")
     @Test
-    fun `deve lançar exceção ao salvar usuário com email duplicado`() {
+    fun should_throw_exception_when_saving_duplicate_email() {
         val email = "duplicate@example.com"
         val user1 = User(email = email, password = "password", role = Role.USER)
         userRepository.save(user1)

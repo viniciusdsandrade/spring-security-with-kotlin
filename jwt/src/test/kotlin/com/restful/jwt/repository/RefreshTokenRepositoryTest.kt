@@ -1,8 +1,8 @@
 package com.restful.jwt.repository
 
 import com.restful.jwt.model.security.RefreshToken
-import com.restful.jwt.repository.RefreshTokenRepository
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -13,8 +13,9 @@ class RefreshTokenRepositoryTest {
     @Autowired
     lateinit var refreshTokenRepository: RefreshTokenRepository
 
+    @DisplayName("deve salvar e encontrar refresh token")
     @Test
-    fun `deve salvar e encontrar refresh token`() {
+    fun should_save_and_find_refresh_token() {
         val token = "sample-token"
         val username = "test@example.com"
         val refreshToken = RefreshToken(token = token, username = username)

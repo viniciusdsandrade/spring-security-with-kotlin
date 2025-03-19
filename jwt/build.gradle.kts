@@ -39,6 +39,7 @@ dependencies {
 
 	compileOnly("org.projectlombok:lombok")
 	testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+	testImplementation("com.h2database:h2:2.1.214")
 
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
