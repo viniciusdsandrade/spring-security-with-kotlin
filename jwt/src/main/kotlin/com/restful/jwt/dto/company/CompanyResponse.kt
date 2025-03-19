@@ -2,7 +2,6 @@ package com.restful.jwt.dto.company
 
 import com.restful.jwt.dto.address.AddressResponse
 
-
 data class CompanyResponse(
     val name: String,
     val email: String,

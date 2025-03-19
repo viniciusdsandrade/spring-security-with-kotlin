@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate
 
 @Configuration
 @EnableConfigurationProperties(JwtProperties::class)
-class ApplicationConfig { // Renomeado de 'Configuration' para evitar ambiguidade
+class ApplicationConfig {
 
     @Bean
     fun restTemplate(): RestTemplate = RestTemplate()
