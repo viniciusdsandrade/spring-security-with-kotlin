@@ -1,11 +1,11 @@
 package com.restful.jwt.controller
 
-// AuthControllerTest.kt
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.restful.jwt.dto.auth.AuthenticationRequest
 import com.restful.jwt.dto.auth.AuthenticationResponse
 import com.restful.jwt.dto.auth.RefreshTokenRequest
 import com.restful.jwt.service.AuthenticationService
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.`when`
@@ -31,7 +31,8 @@ class AuthControllerTest {
     lateinit var objectMapper: ObjectMapper
 
     @Test
-    fun `deve autenticar usuário com sucesso`() {
+    @DisplayName("(deve autenticar usuário com sucesso)")
+    fun should_authenticate_user_successfully() {
         val authRequest = AuthenticationRequest(email = "test@example.com", password = "password")
         val authResponse = AuthenticationResponse(accessToken = "access-token", refreshToken = "refresh-token")
 
@@ -48,7 +49,8 @@ class AuthControllerTest {
     }
 
     @Test
-    fun `deve atualizar token de acesso com sucesso`() {
+    @DisplayName("(deve atualizar token de acesso com sucesso)")
+    fun should_refresh_access_token_successfully() {
         val refreshRequest = RefreshTokenRequest(token = "valid-refresh-token")
         // Simula que o service retorna um novo access token
         `when`(authenticationService.refreshAccessToken("valid-refresh-token")).thenReturn("new-access-token")
@@ -63,7 +65,8 @@ class AuthControllerTest {
     }
 
     @Test
-    fun `deve retornar Forbidden ao atualizar token de acesso com token inválido`() {
+    @DisplayName("(deve retornar Forbidden ao atualizar token de acesso com token inválido)")
+    fun should_return_forbidden_when_refreshing_access_token_with_invalid_token() {
         val refreshRequest = RefreshTokenRequest(token = "invalid-token")
         `when`(authenticationService.refreshAccessToken("invalid-token")).thenReturn(null)
 
