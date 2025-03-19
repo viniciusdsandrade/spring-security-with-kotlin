@@ -85,15 +85,16 @@ class CompanyServiceImpl(
         // Converte o PersistentAddress para o tipo Address (embeddable) usado na Company
         val address = persistentAddress?.toModel()
 
-        // 5) Monta a Company com base no CompanyRequest, utilizando o endereço persistido
+        // 5) Monta a Company com base no CompanyRequest, utilizando o endereço persistido e associando o User
         val company = Company(
             name = companyRequest.name,
             email = companyRequest.email,
             phone = companyRequest.phone,
             cnpj = companyRequest.cnpj,
             additionalInfo = companyRequest.additionalInfo,
-            address = address, // Endereço persistido e único
-            employees = emptySet() // Inicialmente, a empresa é criada sem funcionários
+            address = address,       // Endereço persistido e único
+            employees = emptySet(),
+            user = savedUser         // Associação one-to-one com o User
         )
 
         // 6) Salva a Company no banco de dados
