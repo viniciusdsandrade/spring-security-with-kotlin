@@ -4,9 +4,9 @@ import com.restful.jwt.model.security.User
 import java.util.*
 
 interface UserService {
-    fun createUser(user: User): User?
-    fun findByUUID(uuid: UUID): User?
-    fun findByEmail(email: String): User?
+    fun deleteByUUID(id: UUID): Boolean
     fun findAll(): List<User>
-    fun deleteByUUID(uuid: UUID): Boolean
+    fun findByEmail(email: String): User?
+    fun findByUUID(id: UUID): User?
+    fun createUser(user: User): User?
 }

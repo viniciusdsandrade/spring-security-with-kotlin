@@ -1,0 +1,31 @@
+1742580789722|17|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT version()|SELECT version()
+1742580789731|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SHOW search_path|SHOW search_path
+1742580789731|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT CURRENT_USER|SELECT CURRENT_USER
+1742580789731|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT current_schema|SELECT current_schema
+1742580789731|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SHOW search_path|SHOW search_path
+1742580789733|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT current_schema|SELECT current_schema
+1742580789733|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SHOW search_path|SHOW search_path
+1742580789733|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT current_user|SELECT current_user
+1742580789771|32|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT COUNT(*) FROM pg_namespace WHERE nspname=?|SELECT COUNT(*) FROM pg_namespace WHERE nspname='public'
+1742580789785|2|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SET ROLE 'postgres'|SET ROLE 'postgres'
+1742580789795|9|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT EXISTS (   SELECT 1   FROM   pg_catalog.pg_class c   JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace   WHERE  n.nspname = ?   AND    c.relname = ?   AND    c.relkind = 'r' )|SELECT EXISTS (   SELECT 1   FROM   pg_catalog.pg_class c   JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace   WHERE  n.nspname = 'public'   AND    c.relname = 'flyway_schema_history'   AND    c.relkind = 'r' )
+1742580789824|26|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|/*NO LOAD BALANCE*/ SELECT "installed_rank","version","description","type","script","checksum","installed_on","installed_by","execution_time","success" FROM "public"."flyway_schema_history" WHERE "installed_rank" > ? ORDER BY "installed_rank"|/*NO LOAD BALANCE*/ SELECT "installed_rank","version","description","type","script","checksum","installed_on","installed_by","execution_time","success" FROM "public"."flyway_schema_history" WHERE "installed_rank" > -1 ORDER BY "installed_rank"
+1742580789829|1|commit|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth||
+1742580789832|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT COUNT(*) FROM pg_namespace WHERE nspname=?|SELECT COUNT(*) FROM pg_namespace WHERE nspname='public'
+1742580789833|0|commit|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth||
+1742580789833|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SET ROLE 'postgres'|SET ROLE 'postgres'
+1742580789834|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT EXISTS (   SELECT 1   FROM   pg_catalog.pg_class c   JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace   WHERE  n.nspname = ?   AND    c.relname = ?   AND    c.relkind = 'r' )|SELECT EXISTS (   SELECT 1   FROM   pg_catalog.pg_class c   JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace   WHERE  n.nspname = 'public'   AND    c.relname = 'flyway_schema_history'   AND    c.relkind = 'r' )
+1742580789844|0|statement|connection 1|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SHOW search_path|SHOW search_path
+1742580789845|0|statement|connection 1|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT CURRENT_USER|SELECT CURRENT_USER
+1742580789846|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SET ROLE 'postgres'|SET ROLE 'postgres'
+1742580789870|23|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT pg_try_advisory_xact_lock(77433833903597)|SELECT pg_try_advisory_xact_lock(77433833903597)
+1742580789871|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SET ROLE 'postgres'|SET ROLE 'postgres'
+1742580789872|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT EXISTS (   SELECT 1   FROM   pg_catalog.pg_class c   JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace   WHERE  n.nspname = ?   AND    c.relname = ?   AND    c.relkind = 'r' )|SELECT EXISTS (   SELECT 1   FROM   pg_catalog.pg_class c   JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace   WHERE  n.nspname = 'public'   AND    c.relname = 'flyway_schema_history'   AND    c.relkind = 'r' )
+1742580789874|1|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|/*NO LOAD BALANCE*/ SELECT "installed_rank","version","description","type","script","checksum","installed_on","installed_by","execution_time","success" FROM "public"."flyway_schema_history" WHERE "installed_rank" > ? ORDER BY "installed_rank"|/*NO LOAD BALANCE*/ SELECT "installed_rank","version","description","type","script","checksum","installed_on","installed_by","execution_time","success" FROM "public"."flyway_schema_history" WHERE "installed_rank" > 1 ORDER BY "installed_rank"
+1742580789877|1|commit|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth||
+1742580789878|0|statement|connection 1|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SET ROLE 'postgres'|SET ROLE 'postgres'
+1742580789879|0|statement|connection 1|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT set_config('search_path', ?, false)|SELECT set_config('search_path', '"$user", public', false)
+1742580789880|0|commit|connection 1|url jdbc:p6spy:postgresql://localhost:5432/db_auth||
+1742580789885|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SET ROLE 'postgres'|SET ROLE 'postgres'
+1742580789886|0|statement|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth|SELECT set_config('search_path', ?, false)|SELECT set_config('search_path', '"$user", public', false)
+1742580789886|0|commit|connection 0|url jdbc:p6spy:postgresql://localhost:5432/db_auth||

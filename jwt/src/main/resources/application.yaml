@@ -1,28 +1,36 @@
+spring:
+  datasource:
+    url: jdbc:p6spy:postgresql://localhost:5432/${POSTGRES_DB:db_auth}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+#        generate_statistics: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    out-of-order: true
+    validate-on-migrate: true
+    locations: classpath:db/migration
+
 jwt:
   key: ${JWT_KEY}
   access-token-expiration: 3600000
   refresh-token-expiration: 8640000
 
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB:db_auth}
-    username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD}
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-
 logging:
   level:
-    org:
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
+    flywaydb: TRACE
+    flyway: TRACE
+    p6spy: TRACE
+#    org.hibernate.SQL: TRACE
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#    org.hibernate.loader.Loader: TRACE

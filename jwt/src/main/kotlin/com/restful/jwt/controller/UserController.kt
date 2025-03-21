@@ -6,11 +6,12 @@ import com.restful.jwt.model.enumerated.Role
 import com.restful.jwt.model.security.User
 import com.restful.jwt.service.UserService
 import jakarta.validation.Valid
-import org.springframework.http.HttpStatus.*
+import org.springframework.http.HttpStatus.BAD_REQUEST
+import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
-import java.util.*
+import java.util.UUID
 import java.util.UUID.randomUUID
 
 @CrossOrigin(origins = ["http://localhost:5173"])
@@ -21,10 +22,8 @@ class UserController(
 ) {
 
     @PostMapping("/create")
-    fun createUser(@Valid  @RequestBody userRequest: UserRequest): UserResponse =
-        userService.createUser(
-            user = userRequest.toModel()
-        )
+    fun createUser(@Valid @RequestBody userRequest: UserRequest): UserResponse =
+        userService.createUser(userRequest.toModel())
             ?.toResponse()
             ?: throw ResponseStatusException(BAD_REQUEST, "User already exists")
 

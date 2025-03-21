@@ -15,6 +15,8 @@ FROM tb_users;
 SELECT * FROM tb_employees;
 SELECT * FROM tb_companies;
 
+SELECT * FROM information_schema.tables WHERE table_schema = 'public';
+SELECT * FROM flyway_schema_history;
 
 
 -- Consulta para listar todas as tabelas de um banco de dados

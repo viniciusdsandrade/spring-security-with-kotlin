@@ -26,7 +26,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
+	implementation("org.flywaydb:flyway-core")
 	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
 	implementation("io.jsonwebtoken:jjwt-impl:0.12.6")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.12.6")
@@ -36,6 +36,8 @@ dependencies {
 	implementation("io.swagger.core.v3:swagger-annotations:2.2.28")
 	implementation("io.swagger:swagger-annotations:1.6.14")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("p6spy:p6spy:3.9.1")
+	implementation("org.postgresql:postgresql:42.7.2")
 
 	compileOnly("org.projectlombok:lombok")
 
