@@ -3,7 +3,6 @@ package com.restful.jwt.repository.jdbc
 import com.restful.jwt.dto.company.CompanyRequest
 import com.restful.jwt.model.Address
 import com.restful.jwt.model.Company
-import com.restful.jwt.model.PersistentAddress
 import com.restful.jwt.model.enumerated.Role
 import com.restful.jwt.model.enumerated.Role.COMPANY
 import com.restful.jwt.model.security.User
@@ -108,12 +107,12 @@ class CompanyRepositoryJdbc(
         return count != null && count > 0
     }
 
-    override fun save(companyRequest: CompanyRequest): Company {
+    override fun save(company: CompanyRequest): Company {
         // 1) Cria o usuário associado com role COMPANY
         val user = User(
             id = randomUUID(),
-            email = companyRequest.email,
-            password = companyRequest.password,
+            email = company.email,
+            password = company.password,
             role = COMPANY
         )
 
@@ -128,7 +127,7 @@ class CompanyRepositoryJdbc(
 
         // 3) Chama a API dos Correios para complementar o endereço.
         //    O input possui apenas CEP e número; os demais dados serão obtidos pela API.
-        val finalAddress: Address? = companyRequest.address?.let { addressRequest ->
+        val finalAddress: Address? = company.address?.let { addressRequest ->
             if (addressRequest.cep != null) {
                 val apiAddress = correiosApiClient.getAddressByCep(addressRequest.cep)
                 if (apiAddress != null) {
@@ -167,13 +166,13 @@ class CompanyRepositoryJdbc(
         }
 
         // 5) Monta a entidade Company com o endereço persistido e o usuário associado
-        val company = Company(
+        val companyToSave = Company(
             id = randomUUID(),
-            name = companyRequest.name,
-            email = companyRequest.email,
-            phone = companyRequest.phone,
-            cnpj = companyRequest.cnpj,
-            additionalInfo = companyRequest.additionalInfo,
+            name = company.name,
+            email = company.email,
+            phone = company.phone,
+            cnpj = company.cnpj,
+            additionalInfo = company.additionalInfo,
             address = persistedAddress,
             employees = emptySet(),
             user = user
@@ -189,28 +188,28 @@ class CompanyRepositoryJdbc(
                 user_id
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """.trimIndent(),
-            company.id,
-            company.name,
-            company.email,
-            company.phone,
-            company.cnpj,
-            company.additionalInfo,
-            company.address?.cep,
-            company.address?.logradouro,
-            company.address?.numero,
-            company.address?.complemento,
-            company.address?.unidade,
-            company.address?.bairro,
-            company.address?.localidade,
-            company.address?.uf,
-            company.address?.estado,
-            company.address?.regiao,
-            company.address?.ibge,
-            company.address?.gia,
-            company.address?.ddd,
-            company.address?.siafi,
-            company.user.id
+            companyToSave.id,
+            companyToSave.name,
+            companyToSave.email,
+            companyToSave.phone,
+            companyToSave.cnpj,
+            companyToSave.additionalInfo,
+            companyToSave.address?.cep,
+            companyToSave.address?.logradouro,
+            companyToSave.address?.numero,
+            companyToSave.address?.complemento,
+            companyToSave.address?.unidade,
+            companyToSave.address?.bairro,
+            companyToSave.address?.localidade,
+            companyToSave.address?.uf,
+            companyToSave.address?.estado,
+            companyToSave.address?.regiao,
+            companyToSave.address?.ibge,
+            companyToSave.address?.gia,
+            companyToSave.address?.ddd,
+            companyToSave.address?.siafi,
+            companyToSave.user.id
         )
-        return company
+        return companyToSave
     }
 }
