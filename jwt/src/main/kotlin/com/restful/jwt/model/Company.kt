@@ -3,6 +3,7 @@ package com.restful.jwt.model
 import com.restful.jwt.dto.address.AddressResponse
 import com.restful.jwt.dto.company.CompanyResponse
 import com.restful.jwt.model.enumerated.Role
+import com.restful.jwt.model.enumerated.Role.COMPANY
 import com.restful.jwt.model.security.User
 import java.util.*
 import java.util.UUID.randomUUID
@@ -16,7 +17,7 @@ data class Company(
     val phone: String,
     val cnpj: String,
     val additionalInfo: String? = null,
-    val role: Role = Role.COMPANY,
+    val role: Role = COMPANY,
     val address: Address? = null,
     val employees: Set<Employee> = emptySet(),
 

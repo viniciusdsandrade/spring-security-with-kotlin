@@ -13,7 +13,6 @@ data class User(
     val role: Role
 ) {
     override fun toString(): String {
-        // Evita expor a senha
         return "User(id=$id, email='$email', password='[PROTECTED]', role=$role)"
     }
 }
