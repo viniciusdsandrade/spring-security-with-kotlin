@@ -11,8 +11,6 @@ interface TokenService {
     ): String
 
     fun extractEmail(token: String): String
-
     fun isExpired(token: String): Boolean
-
     fun isValid(token: String, userDetails: UserDetails): Boolean
 }

@@ -22,10 +22,11 @@ class UserController(
 ) {
 
     @PostMapping("/create")
-    fun createUser(@Valid @RequestBody userRequest: UserRequest): UserResponse =
-        userService.createUser(userRequest.toModel())
-            ?.toResponse()
+    fun createUser(@Valid @RequestBody userRequest: UserRequest): UserResponse {
+        val createdUser = userService.createUser(userRequest)
             ?: throw ResponseStatusException(BAD_REQUEST, "User already exists")
+        return createdUser.toResponse()
+    }
 
     @GetMapping
     fun listAllUsers(): List<UserResponse> =
@@ -36,24 +37,6 @@ class UserController(
         userService.findByUUID(uuid)
             ?.toResponse()
             ?: throw ResponseStatusException(NOT_FOUND, "User not found")
-
-    @DeleteMapping("/{uuid}")
-    fun deleteUserById(@PathVariable uuid: UUID): ResponseEntity<Boolean> {
-        val success = userService.deleteByUUID(uuid)
-        return if (success) {
-            ResponseEntity.noContent().build()
-        } else {
-            ResponseEntity.notFound().build()
-        }
-    }
-
-    private fun UserRequest.toModel(): User =
-        User(
-            id = randomUUID(),
-            email = this.email,
-            password = this.password,
-            role = Role.USER
-        )
 
     private fun User.toResponse(): UserResponse =
         UserResponse(

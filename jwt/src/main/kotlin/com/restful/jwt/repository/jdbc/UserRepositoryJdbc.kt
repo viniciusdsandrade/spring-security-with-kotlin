@@ -1,5 +1,6 @@
 package com.restful.jwt.repository.jdbc
 
+import com.restful.jwt.dto.user.UserRequest
 import com.restful.jwt.model.enumerated.Role
 import com.restful.jwt.model.security.User
 import com.restful.jwt.repository.UserRepository
@@ -8,6 +9,8 @@ import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Repository
 import java.sql.ResultSet
 import java.util.UUID
+import java.util.UUID.fromString
+import java.util.UUID.randomUUID
 
 @Repository("userRepository")
 class UserRepositoryJdbc(
@@ -16,7 +19,7 @@ class UserRepositoryJdbc(
 
     private val userRowMapper = RowMapper { rs: ResultSet, _: Int ->
         User(
-            id = UUID.fromString(rs.getString("id")),
+            id = fromString(rs.getString("id")),
             email = rs.getString("email"),
             password = rs.getString("password"),
             role = Role.valueOf(rs.getString("role"))
@@ -39,16 +42,26 @@ class UserRepositoryJdbc(
         }
     }
 
-    override fun save(user: User): User {
+    override fun save(user: UserRequest): User {
+        val id = randomUUID()
+        val defaultRole = Role.USER
+
         jdbcTemplate.update(
             "INSERT INTO tb_users (id, email, password, role) VALUES (?, ?, ?, ?)",
-            user.id,            // passe o UUID diretamente
+            id, // passa o UUID diretamente
             user.email,
             user.password,
-            user.role.toString()
+            defaultRole.toString()
         )
-        return user
+
+        return User(
+            id = id,
+            email = user.email,
+            password = user.password,
+            role = defaultRole
+        )
     }
+
 
     override fun findAll(): List<User> =
         jdbcTemplate.query("SELECT * FROM tb_users", userRowMapper)

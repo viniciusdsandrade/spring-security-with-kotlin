@@ -1,5 +1,6 @@
 package com.restful.jwt.service.impl
 
+import com.restful.jwt.dto.user.UserRequest
 import com.restful.jwt.model.security.User
 import com.restful.jwt.repository.UserRepository
 import com.restful.jwt.service.UserService
@@ -13,7 +14,7 @@ class UserServiceImpl(
     private val passwordEncoder: PasswordEncoder
 ) : UserService {
 
-    override fun createUser(user: User): User? {
+    override fun createUser(user : UserRequest): User? {
         val found = userRepository.findByEmail(user.email)
         return if (found == null) {
             val encodedUser = user.copy(password = passwordEncoder.encode(user.password))
@@ -30,7 +31,4 @@ class UserServiceImpl(
     override fun findAll(): List<User> =
         userRepository.findAll()
 
-    override fun deleteByUUID(id: UUID): Boolean {
-        return userRepository.deleteById(id)
-    }
 }
