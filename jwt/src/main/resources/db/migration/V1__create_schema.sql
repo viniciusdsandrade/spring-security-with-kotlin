@@ -30,10 +30,19 @@ DROP TABLE IF EXISTS tb_users;
 -------------------------------------------------
 CREATE TABLE IF NOT EXISTS tb_users
 (
-    id       VARCHAR(36) PRIMARY KEY,
-    email    VARCHAR(255) NOT NULL UNIQUE,
+    id       VARCHAR(36),
+    email    VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role     VARCHAR(50)  NOT NULL CHECK (role IN ('USER', 'ADMIN', 'EMPLOYEE', 'MERCHANT', 'COMPANY'))
+    role     VARCHAR(50)  NOT NULL CHECK (
+        role IN ('USER',
+                 'ADMIN',
+                 'EMPLOYEE',
+                 'MERCHANT',
+                 'COMPANY')),
+
+    UNIQUE (email),
+
+    PRIMARY KEY (id)
 );
 
 -------------------------------------------------
@@ -41,9 +50,11 @@ CREATE TABLE IF NOT EXISTS tb_users
 -------------------------------------------------
 CREATE TABLE IF NOT EXISTS tb_refresh_tokens
 (
-    id       VARCHAR(36) PRIMARY KEY,
+    id       VARCHAR(36),
     token    VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL
+    username VARCHAR(255) NOT NULL,
+
+    PRIMARY KEY (id)
 );
 
 -------------------------------------------------
@@ -51,7 +62,7 @@ CREATE TABLE IF NOT EXISTS tb_refresh_tokens
 -------------------------------------------------
 CREATE TABLE IF NOT EXISTS tb_addresses
 (
-    id          VARCHAR(36) PRIMARY KEY,
+    id          VARCHAR(36),
     cep         VARCHAR(20)  NOT NULL,
     logradouro  VARCHAR(255),
     numero      VARCHAR(50)  NOT NULL,
@@ -66,7 +77,10 @@ CREATE TABLE IF NOT EXISTS tb_addresses
     gia         VARCHAR(50),
     ddd         VARCHAR(10),
     siafi       VARCHAR(50),
-    CONSTRAINT uq_addresses_cep_numero UNIQUE (cep, numero)
+
+    UNIQUE (cep, numero),
+
+    PRIMARY KEY (id)
 );
 
 -------------------------------------------------
@@ -74,7 +88,7 @@ CREATE TABLE IF NOT EXISTS tb_addresses
 -------------------------------------------------
 CREATE TABLE IF NOT EXISTS tb_companies
 (
-    id              VARCHAR(36) PRIMARY KEY,
+    id              VARCHAR(36),
     name            VARCHAR(255) NOT NULL,
     email           VARCHAR(255) NOT NULL UNIQUE,
     phone           VARCHAR(20)  NOT NULL,
@@ -98,7 +112,12 @@ CREATE TABLE IF NOT EXISTS tb_companies
     siafi           VARCHAR(50),
     -- Associação com o usuário (apenas user_id)
     user_id         VARCHAR(36)  NOT NULL,
-    CONSTRAINT fk_company_user FOREIGN KEY (user_id) REFERENCES tb_users(id)
+
+    UNIQUE (cnpj),
+    UNIQUE (email),
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES tb_users (id)
 );
 
 -------------------------------------------------
@@ -106,9 +125,9 @@ CREATE TABLE IF NOT EXISTS tb_companies
 -------------------------------------------------
 CREATE TABLE IF NOT EXISTS tb_employees
 (
-    id              VARCHAR(36) PRIMARY KEY,
+    id              VARCHAR(36),
     name            VARCHAR(255) NOT NULL,
-    email           VARCHAR(255) NOT NULL UNIQUE,
+    email           VARCHAR(255) NOT NULL,
     phone           VARCHAR(20)  NOT NULL,
     cpf             VARCHAR(20)  NOT NULL,
     additional_info VARCHAR(255),
@@ -130,14 +149,19 @@ CREATE TABLE IF NOT EXISTS tb_employees
     role            VARCHAR(50)  NOT NULL CHECK (role = 'EMPLOYEE'),
     -- Associação com o usuário (apenas user_id)
     user_id         VARCHAR(36)  NOT NULL,
-    CONSTRAINT fk_employee_user FOREIGN KEY (user_id) REFERENCES tb_users(id)
+
+    UNIQUE (email),
+    UNIQUE (cpf),
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES tb_users (id)
 );
 
-SELECT * FROM tb_users;
-SELECT * FROM tb_refresh_tokens;
-SELECT * FROM tb_companies;
-SELECT * FROM tb_addresses;
 
 
-
-TRUNCATE TABLE tb_employees, tb_companies, tb_addresses, tb_refresh_tokens, tb_users RESTART IDENTITY CASCADE;
+TRUNCATE TABLE
+    tb_employees,
+    tb_companies,
+    tb_addresses,
+    tb_refresh_tokens,
+    tb_users RESTART IDENTITY CASCADE;

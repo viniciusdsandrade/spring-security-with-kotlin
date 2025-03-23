@@ -4,7 +4,7 @@ import com.restful.jwt.dto.company.CompanyRequest
 import com.restful.jwt.dto.company.CompanyResponse
 import com.restful.jwt.service.CompanyService
 import jakarta.validation.Valid
-import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
@@ -28,5 +28,5 @@ class CompanyController(
     @GetMapping("/{uuid}")
     fun findCompanyById(@PathVariable uuid: UUID): CompanyResponse =
         companyService.findByUUID(uuid)
-            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Company not found")
+            ?: throw ResponseStatusException(NOT_FOUND, "Company not found")
 }
